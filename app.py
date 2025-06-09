@@ -38,13 +38,19 @@ def save_edits(edited_df):
 
 # --- APP UI ---
 
-st.title("📋 Interactive Data Entry App")
-st.write("Enter **Name** and **City**, auto-add timestamp, edit data, download, clear, or change file name.")
+st.title("📋 Interactive Data Entry App (User-Specific Files)")
 
-# 1️⃣ File name input
-default_filename = 'test_data.xlsx'
-filename_input = st.text_input("📁 Current Excel File Name (with .xlsx):", value=default_filename)
-filename = filename_input.strip() if filename_input.strip() else default_filename
+# 0️⃣ User identification
+username = st.text_input("Enter your username (required):")
+
+if not username:
+    st.warning("Please enter a username to use the app.")
+    st.stop()
+
+# 1️⃣ Build filename based on username
+filename = f"data-{username}.xlsx"
+
+st.markdown(f"**Current file:** `{filename}`")
 
 st.markdown("---")
 
